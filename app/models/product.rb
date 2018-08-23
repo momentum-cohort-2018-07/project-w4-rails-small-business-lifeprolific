@@ -1,9 +1,12 @@
 class Product
-  attr_reader :pid, :item, :description,:price, :condition, :dimension_w,
+  include ActiveModel::Model
+
+  attr_reader :id, :pid, :item, :description,:price, :condition, :dimension_w,
               :dimension_l, :dimension_h, :img_file, :quantity, :category
   
   def initialize(pid, item, description, price, condition, dimension_w,
                   dimension_l, dimension_h, img_file, quantity, category)
+    @id = pid
     @pid = pid
     @item = item
     @description = description
@@ -16,4 +19,9 @@ class Product
     @quantity = quantity
     @category = category
   end
+
+  def persisted?
+    self.id.present?
+  end
+
 end
