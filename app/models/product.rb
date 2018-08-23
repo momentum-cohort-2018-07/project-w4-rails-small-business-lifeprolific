@@ -24,4 +24,8 @@ class Product
     self.id.present?
   end
 
+  def img
+    'products/' + @img_file + '.jpg'
+  end
+
 end

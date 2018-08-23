@@ -1,4 +1,5 @@
 class ProductsController < ApplicationController
+
   def index
     @products = Inventory.new.products
   end
