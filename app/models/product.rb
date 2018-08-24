@@ -1,5 +1,6 @@
 class Product
   include ActiveModel::Model
+  CLEARANCES = {'good' => 0.1, 'average' => 0.2 }
 
   attr_reader :id, :pid, :item, :description,:price, :condition, :dimension_w,
               :dimension_l, :dimension_h, :img_file, :quantity, :category
@@ -26,6 +27,18 @@ class Product
 
   def img
     'products/' + @img_file + '.jpg'
+  end
+
+  def clearance?
+    CLEARANCES.has_key?(@condition)
+  end
+
+  def clearance_price
+    @price.to_f - @price.to_f * CLEARANCES[@condition]
+  end
+
+  def clearance_amount
+    CLEARANCES[@condition]
   end
 
 end
