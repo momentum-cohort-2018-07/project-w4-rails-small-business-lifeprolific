@@ -34,7 +34,11 @@ class Product
   end
 
   def clearance_price
-    @price.to_f - @price.to_f * CLEARANCES[@condition]
+    if clearance?
+      @price.to_f - @price.to_f * CLEARANCES[@condition]
+    else
+      @price
+    end
   end
 
   def clearance_amount
