@@ -1,7 +1,8 @@
 class ProductsController < ApplicationController
 
   def index
-    @product_cats = Inventory.new.product_cats(['bedroom', 'storage'])
+    categories = params.select { |key, value| value == "1" }.keys
+    @product_cats = Inventory.new.product_cats(categories)
   end
 
   def show
