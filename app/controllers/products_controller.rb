@@ -1,10 +1,10 @@
 class ProductsController < ApplicationController
 
   def index
-    @products = Inventory.new(params[:category]).products
+    @products = Inventory.new.products(['bedroom', 'storage'])
   end
 
   def show
-    @product = Inventory.new.products[params[:id]]
+    @product = Inventory.new.product(params[:id])
   end
 end

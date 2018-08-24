@@ -1,17 +1,27 @@
 require 'csv'
 class Inventory
   CSV_FILE = "./faust_furniture/data-import/faust_inventory.csv"
-  attr_reader :products
+  CSV_TABLE = CSV.read(CSV_FILE, converters: :numeric, headers: true)
 
-  def initialize(category = 'all')
-    @products = {}
-    CSV.foreach(CSV_FILE) do |row|
-      if category == 'all'
-        @products[row[0]] = Product.new(*row)
-      elsif category == row[10]
-        @products[row[0]] = Product.new(*row)
-      end
-    end
-    @products.delete('pid')
+  attr_reader :categories
+
+  def initialize
+    @categories = CSV_TABLE['category'].uniq
   end
+
+  def products(categories)
+    output = []
+    CSV_TABLE.select{|row| categories.include?(row['category'])}.each do |row|
+      output << Product.new(row.to_hash)
+    end
+    output
+  end
+
+  def product(pid)
+    row = CSV_TABLE.find{ |row| row['pid'] == pid.to_i}
+    if row.class != nil
+      Product.new(row.to_hash)
+    end
+  end
+
 end
