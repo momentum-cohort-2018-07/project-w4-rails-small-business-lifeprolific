@@ -9,10 +9,11 @@ class Inventory
     @categories = CSV_TABLE['category'].uniq
   end
 
-  def products(categories)
-    output = []
-    CSV_TABLE.select{|row| categories.include?(row['category'])}.each do |row|
-      output << Product.new(row.to_hash)
+  def product_cats(categories)
+    output = {}
+    categories.each { |category| output[category] = []}
+    CSV_TABLE.select{ |row| categories.include?(row['category']) }.each do |row|
+      output[row['category']] << Product.new(row.to_hash)
     end
     output
   end

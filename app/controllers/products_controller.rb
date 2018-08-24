@@ -1,7 +1,7 @@
 class ProductsController < ApplicationController
 
   def index
-    @products = Inventory.new.products(['bedroom', 'storage'])
+    @product_cats = Inventory.new.product_cats(['bedroom', 'storage'])
   end
 
   def show

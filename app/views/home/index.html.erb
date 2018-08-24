@@ -1,5 +1,3 @@
 <h1>Home#index</h1>
-<p><%= link_to('all products', action: 'index', controller: 'products', category: 'all') %></p>
-<p><%= link_to('tables', action: 'index', controller: 'products', category: 'tables') %></p>
-<p><%= link_to('seating', action: 'index', controller: 'products', category: 'seating') %></p>
-<p><%= link_to('bedroom', action: 'index', controller: 'products', category: 'bedroom') %></p>
+<p><%= @categories %></p>
+<p><%= link_to('all products', action: 'index', controller: 'products', categories: ['bedroom']) %></p>
