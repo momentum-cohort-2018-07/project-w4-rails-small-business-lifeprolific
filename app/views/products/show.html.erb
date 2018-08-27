@@ -1,14 +1,11 @@
-<h1>Products#show</h1>
-<p>Find me in app/views/products/show.html.erb</p>
+<h1><%= @product.item %></h1>
+<%= link_to('home', action: 'index', controller: 'home') %><br>
 <%= image_tag(@product.img) %>
-<p><%= @product.item %></p>
 <p><%= @product.description %></p>
-<p><%= @product.price %></p>
-<p><%= @product.condition %></p>
-<p><%= @product.dimension_w %></p>
-<p><%= @product.dimension_l %></p>
-<p><%= @product.dimension_h %></p>
-<p><%= @product.quantity %></p>
-<p><%= @product.category %></p>
-<p><%= @product.clearance? %></p>
-<p><%= @product.clearance_price %></p>
+<p>$<%= @product.price %></p>
+<% if @product.clearance? %>
+  <p>clearance: $<%= @product.clearance_price %>, <%= number_to_percentage(@product.clearance_amount*100, precision: 0) %> off!</p>
+<% end %>
+<p>condition: <%= @product.condition %></p>
+<p>w,l,h: <%= @product.dimension_w %>",<%= @product.dimension_l %>",<%= @product.dimension_h %>"</p>
+<p><%= @product.quantity %> left!</p>

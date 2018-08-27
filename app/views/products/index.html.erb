@@ -1,10 +1,20 @@
 <h1>Products</h1>
-<p>params: <%= @params =%></p>
+<%= link_to('home', action: 'index', controller: 'home') %><br>
 <% @product_cats.each do |category, products| %>
   <h2><%= category %></h2>
   <% products.each do |product| %>
-    <p><%= product.item %></p>
-    <p><%= product.id %></p>
-    <p><%= link_to(product.item, product) %></p>
+    <% if product.quantity > 0 %>
+      <div class="card" style="width: 18rem;">
+        <%= image_tag(product.img, :class => "card-img-top" ) %>
+        <div class="card-body">
+          <h5 class="card-title"><%= link_to(product.item, product) %></h5>
+          <p class="card-text">$<%= product.price %></p>
+          <% if product.clearance? %>
+            <p class="card-text">clearance: $<%= product.clearance_price %>, <%= number_to_percentage(product.clearance_amount*100, precision: 0) %> off!</p>
+          <% end %>
+          <p><%= product.quantity %> remaining<p>
+        </div>
+      </div>
+    <% end %>
   <% end %>
 <% end %>
