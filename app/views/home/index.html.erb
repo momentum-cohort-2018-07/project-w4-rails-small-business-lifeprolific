@@ -1,0 +1,15 @@
+<h1 class="card-title">Faust Furniture</h1>
+
+<%= image_tag("hero.jpg", :class => "splash") %>
+
+<%= form_tag({controller: "products", action: "index"}, {method: "get"}) do %>
+
+    <ul class="list-group list-group-flush">
+      <% @categories.each do |category| %>
+        <li class="list-group-item"><%= check_box_tag(category) %>
+        <%= label_tag(category, category) %></li>
+      <% end %>
+    </ul>
+
+    <%= submit_tag("Search") %>
+<% end %>
